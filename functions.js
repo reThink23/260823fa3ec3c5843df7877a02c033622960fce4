@@ -39,44 +39,11 @@ Array.prototype.replace = function(item, pos) {
 	return this.splice(pos,1,item)
 }
 
-// Array.prototype.size = function() {
-// 	i = 0
-// 	for (let i = 0; i < this.length; i++) {
-// 		if (this[i].isArray()) {
-// 			i++
-// 		}
-
-// 	}
-// }
-
 function remove(array, array2) {
 	res = array.filter(n => {
 		!array2.includes(n)
 	})
 	return res
-}
-
-
-function MailToName(mail) {
-	if (typeof (mail) == "string") {
-		if (mail.includes("@")) {
-			mail = mail.split("@")[0];
-		}
-		names = mail.split(".");
-		names[0] = names[0].toTitleCase();
-		names[1] = names[1].toTitleCase();
-	} else {
-		for (let i = 0; i < mail.length; i++) {
-			const item = mail[i];
-			if (item.includes("@")) {
-				item = item.split("@")[0];
-			}
-			names = item.split(".");
-			names[0] = names[0].toTitleCase();
-			names[1] = names[1].toTitleCase();
-		}
-	}
-	return names
 }
 
 function iter(obj, dest = 0, recursive = true) {
@@ -93,15 +60,6 @@ function iter(obj, dest = 0, recursive = true) {
 
 function ObjToArr(object) {
 	return Array.from(object)
-}
-
-function countParam() {
-	url_params = new URLSearchParams(window.location.search);
-	params_arr = Array.from(url_params.keys());
-	return params_arr.length;
-	// params = window.location.search;
-	// var matches = params.match(/[a-z\d]+=[a-z\d]+/gi);
-	// return matches ? matches.length : 0;
 }
 
 //////////////////////// new ////////////////////////////////////
