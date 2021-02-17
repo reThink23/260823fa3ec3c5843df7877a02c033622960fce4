@@ -99,7 +99,7 @@ function getParams(url=null) {
 	return arr
 }
 
-function serializeURL(obj) {
+function setParams(obj) {
 	params = ""
 	for (const key in obj) {
 		if (Object.hasOwnProperty.call(obj, key)) {
@@ -112,7 +112,7 @@ function serializeURL(obj) {
 function setParam(key, val, url=null, redirect=true) {
 	params = getParams(url)
 	params[key] = val
-	encoded = serializeURL(params)
+	encoded = setParams(params)
 	nURL = (url) ? url : window.location.href
 	fullURL = `${nURL.split("?")[0]}?${encoded}`
 	if (redirect) { window.history.replaceState(null, null, fullURL) }
@@ -122,7 +122,7 @@ function setParam(key, val, url=null, redirect=true) {
 function removeParam(key, url=null, redirect=true) {
 	params = getParams(url)
 	delete params[key]
-	encoded = serializeURL(params)
+	encoded = setParams(params)
 	nURL = (url) ? url : window.location.href
 	fullURL = `${nURL.split("?")[0]}?${encoded}`
 	if (redirect) { window.history.replaceState(null, null, fullURL) }
@@ -130,12 +130,11 @@ function removeParam(key, url=null, redirect=true) {
 }
 
 function param(key,val=null,url=null,redirect=true) {
+	if (val === -1) {
+		return removeParam(key,url,redirect)
+	} 
 	if (val) {
-		if (val === undefined) {
-			return removeParam(key,url,redirect)
-		} else {
 			return setParam(key, val, url, redirect)
-		}
 	} else {
 		return getParam(key, url)
 	}
